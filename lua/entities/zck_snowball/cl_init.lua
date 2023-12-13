@@ -1,5 +1,7 @@
 include("shared.lua")
 
+CreateClientConVar( "snowball_allow_pvp_on_me", 0, true, true, "Opt yourself into snowball pvp", 0, 1)
+
 function ENT:Draw()
 	self:DrawModel()
 end

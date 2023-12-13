@@ -2,6 +2,11 @@ AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 include("shared.lua")
 
+local PlayerPVPState = {}
+hook.Add( "PlayerSpawn", "SnowballPvPCheck", function(Ply)
+	PlayerPVPState[Ply:EntIndex()] = tobool(Ply:GetInfoNum("snowball_allow_pvp_on_me", 0))
+end )
+
 function ENT:Initialize()
 	self:SetModel(self.Model)
 	self:PhysicsInit(SOLID_VPHYSICS)
@@ -17,6 +22,10 @@ end
 
 function ENT:PhysicsCollide(data, phys)
 	if IsValid(data.HitEntity) and data.HitEntity:IsPlayer() and data.HitEntity:Alive() then
+		-- Check if player is in pvp mode
+		if not PlayerPVPState[data.HitEntity:EntIndex()] then self:Explode() return end
+		if not PlayerPVPState[self.Owner:EntIndex()] then self:Explode() return end
+
 		data.HitEntity:TakeDamage(zck.config.Swep.damage, self.Owner, self)
 	end
 
