@@ -25,6 +25,7 @@ function ENT:AcceptInput(key, ply)
 			local snowballCount = swep:GetSnowballCount()
 
 			if snowballCount < zck.config.Swep.MaxAmmo then
+				if key == "Use" then return end
 				swep:SetSnowballCount(snowballCount + 1)
 				self:TakeSnowBall()
 			end
