@@ -28,6 +28,7 @@ function SWEP:ThrowSnowball()
 	ent:SetPos(self.Owner:EyePos() + (self.Owner:GetAimVector() * 25))
 	ent:SetAngles(self.Owner:EyeAngles())
 	ent:SetColor(self:GetColor())
+	ent:SetOwner(self.Owner)
 	ent:Spawn()
 	local phys = ent:GetPhysicsObject()
 
