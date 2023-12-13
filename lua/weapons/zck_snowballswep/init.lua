@@ -8,6 +8,7 @@ function SWEP:Initialize()
 end
 
 function SWEP:Deploy()
+	self:SetColor( (self.Owner:IsPlayer() and self.Owner:GetWeaponColor():ToColor()) or Color(255 ,255, 255, 255) )
 	self:SendWeaponAnim(ACT_VM_DRAW)
 end
 
@@ -26,6 +27,7 @@ function SWEP:ThrowSnowball()
 	if (not IsValid(ent)) then return end
 	ent:SetPos(self.Owner:EyePos() + (self.Owner:GetAimVector() * 25))
 	ent:SetAngles(self.Owner:EyeAngles())
+	ent:SetColor(self:GetColor())
 	ent:Spawn()
 	local phys = ent:GetPhysicsObject()
 
