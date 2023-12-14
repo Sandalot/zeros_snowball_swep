@@ -4,7 +4,7 @@ include("shared.lua")
 
 local PlayerPVPState = {}
 hook.Add( "PlayerSpawn", "SnowballPvPCheck", function(Ply)
-	PlayerPVPState[Ply:EntIndex()] = tobool(Ply:GetInfoNum("snowball_allow_pvp_on_me", 0))
+	PlayerPVPState[Ply:EntIndex()] = tobool(Ply:GetInfoNum("snowball_allow_pvp_on_me", 1))
 end )
 
 function ENT:Initialize()
